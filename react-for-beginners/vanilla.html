@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1 class="clickCount">클릭 수 : <span>0</span></h1>
+    <button class="btn">Click</button>
+
+    <script>
+        let counter = 0;
+        const btn = document.querySelector('.btn');
+        const count = document.querySelector('.clickCount span');
+        function handleCilck() {
+            counter++;
+            count.innerText = counter;
+        } 
+        btn.addEventListener("click", handleCilck);
+    </script>
+</body>
+</html>
