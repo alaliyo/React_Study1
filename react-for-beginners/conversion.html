@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <div id="root"></div>
+    </body>
+
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        function MinutesToHours() {
+            const [amouny, setAmouny] = React.useState(0);
+            const [flipped, setFlipped] = React.useState(false);
+
+            const onChange = (event) => {
+                setAmouny(event.target.value);
+            };
+
+            const reset = () => setAmouny(0);
+
+            const onFlip = () => {
+                reset();
+                setFlipped((current) => !current);
+            };
+
+            return (
+                <div>
+                    <h3>시 & 분</h3>
+                    <div>
+                        <label htmlFor="hours"> 시: </label>
+                        <input 
+                            value={flipped ? Math.floor(amouny / 60) : amouny} 
+                            id="hours" 
+                            type="number"
+                            onChange={onChange}
+                            disabled={flipped} 
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="minures">분: </label>
+                        <input 
+                            value={flipped ? amouny : amouny * 60} 
+                            id="minures" 
+                            type="number" 
+                            onChange={onChange} 
+                            disabled={!flipped}
+                        />
+                    </div>
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onFlip}>Flipped</button>
+                </div>
+            );
+        }
+        function KmToM() {
+            const [amouny, setAmouny] = React.useState(0);
+            const [flipped, setFlipped] = React.useState(false);
+
+            const onChange = (event) => {
+                setAmouny(event.target.value);
+            };
+
+            const reset = () => setAmouny(0);
+
+            const onFlip = () => {
+                reset();
+                setFlipped((current) => !current);
+            };
+
+            return (
+                <div>
+                    <h3>Km & M</h3>
+                    <div>
+                        <label htmlFor="km">Km: </label>
+                        <input 
+                            value={flipped ? amouny / 1000 : amouny} 
+                            id="km" 
+                            type="number" 
+                            onChange={onChange} 
+                            disabled={flipped}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="m"> m: </label>
+                        <input 
+                            value={flipped ? amouny : amouny * 1000} 
+                            id="m" 
+                            type="number"
+                            onChange={onChange}
+                            disabled={!flipped} 
+                        />
+                    </div>
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onFlip}>Flipped</button>
+                </div>
+            );
+        }
+
+        function App() {
+            const [index, setIndex] = React.useState("0");
+            const onSelect = (event) => {
+                setIndex(event.target.value);
+            };
+
+            return (
+                <div>
+                    
+                    <h1 className="h1">Super converter</h1>
+                    <select onChange={onSelect}>
+                        <option value="0">시간 & 분</option>
+                        <option value="1">Km & M</option>
+                    </select>
+                    <hr />
+                    {index === "0" ? <MinutesToHours /> : <KmToM />}
+                    
+                </div>
+            );
+        }
+
+        const root = document.getElementById("root");
+        ReactDOM.render(<App />, root);
+    </script>
+</html>
