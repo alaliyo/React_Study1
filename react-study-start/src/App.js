@@ -1,28 +1,23 @@
 import { useEffect, useState } from 'react';
 
-function App() {
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-
-  const onClick = () => setValue((prev) => prev+1);
-  const onChange = (event) => setKeyword(event.target.value);
-
+function Hello() {
   useEffect(() => {
-    console.log('계속 실행');
-  }, [counter]);
+    console.log('안녕');
+    return () => console.log('잘가')
+  }, [])
+  return <h1>hello</h1>;
+}
 
-  useEffect(() => console.log("api 호출"), []);
-
-  useEffect(() => console.log('text', keyword), [keyword]);
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onclick = () => setShowing((prev) => !prev);
 
   return (
     <div>
-      <input value={keyword} onChange={onChange} type="text" placeholder='검색' />
-      <h1>클릭 횟수: {counter}</h1>
-      <button onClick={onClick}>click me</button>
+      <button onClick={onclick}>{showing ? 'Hide' : 'show'}</button>
+      {showing ? <Hello /> : null}
     </div>
   );
 }
-
 
 export default App;
